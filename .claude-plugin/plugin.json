@@ -1,0 +1,12 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "stack",
+  "version": "0.1.0",
+  "description": "Personal Claude Code stack: engineering workflow skills, specialist subagents, safety hooks and a blunt-mentor output style.",
+  "author": {
+    "name": "Nikita Simankov"
+  },
+  "repository": "https://github.com/nikita-simankov/claude-stack",
+  "license": "MIT",
+  "keywords": ["workflow", "tdd", "code-review", "debugging", "subagents", "hooks"]
+}

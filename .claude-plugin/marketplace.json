@@ -1,0 +1,13 @@
+{
+  "name": "claude-stack",
+  "owner": {
+    "name": "Nikita Simankov"
+  },
+  "plugins": [
+    {
+      "name": "stack",
+      "source": "./",
+      "description": "Personal Claude Code stack: skills, subagents, hooks, output style."
+    }
+  ]
+}
