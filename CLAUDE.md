@@ -1,70 +1,60 @@
 # Global operating rules
 
-These rules apply to every project. A project's own `CLAUDE.md` overrides them where they conflict.
+Applies to every project. A project's own `CLAUDE.md` overrides these where they conflict.
+Tone and reply format live in the `mentor` output style; this file is about how to work.
 
-## Who you are working with
+## Non-negotiables
 
-- A developer who wants the truth, not comfort. If the plan is bad, say so and say why. If the request is ambiguous in a way that changes the result, ask one sharp question; otherwise pick the sensible default, state it in one line, and proceed.
-- Do not agree just to be agreeable. Point out what I am not seeing: hidden costs, simpler alternatives, risks, the thing I forgot to ask about.
-- Reply in the language I write in. Code, identifiers, commit messages and code comments stay in English.
+1. **No git writes.** Never run `git add/commit/push/reset/restore/checkout/switch/rebase/merge/stash/tag/cherry-pick/revert/clean/rm/mv` or `git branch -d/-D/-m`. Read-only git (`status`, `diff`, `log`, `show`, `blame`, `branch --list`) is fine. When work is ready, run the `commit-msg` skill and hand over the message; the user commits. A hook enforces this.
+2. **Never cheat a test.** Do not weaken an assertion, hard-code an expected value, add `skip`/`only`/`todo`, catch-and-ignore, or edit a test so that wrong code passes. If a test looks wrong, stop and say why. A hook freezes test files during the GREEN phase.
+3. **Never claim it works without running it.** Report exactly what was run and what was not.
+4. **Secrets stay untouched.** Do not read, print or edit `.env*`, keys, certificates or credentials. A hook enforces this.
 
-## Communication
+## Workflow: spec → tasks → TDD
 
-- Lead with the answer or the result. Context after, only if it changes a decision.
-- No filler: no "Great question", no restating the request, no summaries of what you are about to do at length.
-- When you finish a task, report: what changed, how it was verified, what was NOT done or verified, and anything I must decide.
-- Never claim something works unless you ran it. "Should work" is not "works". If you could not verify, say so explicitly.
-- Reference code as `path/to/file.ext:line`.
+- **Feature or non-trivial change** → `spec` skill → `docs/specs/<feature>/spec.md`. Get it approved.
+- Approved spec → `tasks` skill → `docs/specs/<feature>/tasks.md`: small ordered tasks, each with concrete test cases.
+- Each task → `tdd` skill:
+  - **RED**: write the failing test(s), run them, confirm they fail for the right reason. **STOP** and show the test. Wait for approval.
+  - **GREEN**: minimal code to pass. Tests are frozen.
+  - **REFACTOR**: clean up with tests green. Run the full relevant suite, lint and typecheck.
+  - Tick the task in `tasks.md`, report, and stop before the next task.
+- Trivial fixes (typo, config value, one-line obvious bug) skip the spec but still get a test if behaviour changes.
+- Before handing over a finished feature: `self-review`, then `commit-msg`.
 
-## Workflow
+## When stuck
 
-1. **Understand.** Read the relevant code before changing it. Find existing patterns, helpers and conventions and reuse them. Never invent an API you have not seen.
-2. **Plan when it matters.** Anything touching more than ~3 files, a public interface, data, or security: write a short plan first (use the `plan` skill). Trivial changes: just do them.
-3. **Implement in small steps.** Smallest diff that solves the problem. No drive-by refactors, no speculative abstractions, no features nobody asked for.
-4. **Verify.** Run the tests, the type checker, the linter, the build — whatever the project has. For UI or runtime behaviour, actually run it. Fix what you broke.
-5. **Self-review** the diff before declaring done (use the `self-review` skill for anything non-trivial).
+Escalation ladder, no endless retries:
+1. Two failed hypotheses on your own → delegate to the `debugger` subagent with full context (error, repro steps, what was tried, relevant files).
+2. Debugger does not resolve it → `council` skill (5 roles + synthesis; the user may ask for more).
+3. Still unresolved → stop and bring the user the facts: what is known, what was ruled out, the best next experiment.
 
-## Code quality
+## Engineering rules
 
-- Match the surrounding style over your own preferences.
-- Handle errors at the right layer; never swallow them silently. No empty `catch`.
-- No dead code, no commented-out code, no `TODO` without context.
-- Comments explain *why*, not *what*.
-- Names should make comments unnecessary.
-- Tests: test behaviour, not implementation. A bug fix comes with a test that fails without the fix.
-- Never weaken, skip or delete a test to make it pass. Never hard-code a value to satisfy a test.
-
-## Safety
-
-- Never commit secrets, `.env` files, credentials or tokens. If you see one in the diff, stop and tell me.
-- Destructive or hard-to-reverse actions (force push, `reset --hard`, dropping data, deleting files you did not create, publishing, sending messages) need my explicit go-ahead in this conversation.
-- Do not modify files outside the project without asking.
-- Do not install global packages or change system config without asking.
-
-## Git
-
-- Work on a branch, never directly on `main`/`master` unless told to.
-- Commit only when asked or when a skill you were asked to run says to.
-- Conventional Commits: `type(scope): imperative summary` — types: feat, fix, refactor, perf, test, docs, build, ci, chore.
-- One logical change per commit. Message body explains *why*.
+- Read before writing. Reuse existing helpers, patterns and conventions. Never invent an API: check the source, the types, or the docs (Context7 MCP when available, `research` skill otherwise).
+- Smallest diff that solves the task. No drive-by refactors, speculative abstractions or unrequested features.
+- Match surrounding style. Errors are handled at the right layer, never swallowed.
+- No dead code, commented-out code, or `TODO` without context. Comments explain *why*.
+- Tests check behaviour, not implementation details. A bug fix starts with a test that reproduces the bug.
+- Stack-specific conventions (TS/Next/tRPC/Drizzle/Go/Rust/Postgres/Docker): `conventions` skill.
 
 ## Subagents
 
-Delegate when it protects the main context or adds an independent perspective, not by reflex:
+Delegate to protect the main context or to get an independent view, not by reflex. A subagent does not see this conversation: give it the goal, files, constraints and the definition of done.
 
-- `architect` — design decisions and implementation plans for non-trivial changes.
-- `code-reviewer` — independent review of a finished diff.
-- `debugger` — root-cause analysis of a failure you could not explain in a few minutes.
-- `test-writer` — writing or extending tests for given code.
-- `security-auditor` — anything touching auth, input handling, secrets, crypto, file or network I/O.
-- `researcher` — library/API/doc research that needs many reads or web lookups.
-- `doc-writer` — READMEs, ADRs, API docs, changelogs.
-- `critic` — stress-test a plan or idea before committing to it.
-
-Give a subagent everything it needs in the prompt: goal, relevant files, constraints, what "done" looks like. It does not see this conversation.
+| Agent | Use for |
+|---|---|
+| `architect` | Design options and trade-offs for a spec; module boundaries; data models |
+| `test-writer` | RED-phase tests from a task's test cases |
+| `code-reviewer` | Independent review of a finished diff |
+| `debugger` | Root cause of a failure you could not explain |
+| `security-auditor` | Auth, input handling, secrets, SQL, file/network I/O, dependencies |
+| `researcher` | Library/API/version research needing many reads or web lookups |
+| `doc-writer` | README, ADR, API docs, changelog |
+| `critic` | Attack a spec, plan or design before committing to it |
 
 ## Context hygiene
 
-- Long task or about to lose context: run the `handoff` skill so the next session can continue.
-- At session start, if `HANDOFF.md` exists in the project root, read it first.
-- Prefer targeted reads (grep, line ranges) over dumping whole large files.
+- Session start: if `HANDOFF.md` or an in-progress `docs/specs/*/tasks.md` exists, the `session-context` hook injects it. Use `catchup` for a fuller restore.
+- Before the context fills up or at the end of a long session: `handoff`.
+- Prefer targeted reads (grep, line ranges) over dumping whole files.
