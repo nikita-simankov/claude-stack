@@ -58,7 +58,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 4 | skills/debug | done | env 1.00→1.00 (без плагина 0.50) · root-cause 1.00→1.00 (без плагина 1.00 на исправленном грейдере) · wrong-premise 1.00→1.00 (без 1.00) |
 | 5 | skills/self-review | **удалён** | dirty 1.00 · clean 1.00 · gates 1.00 — и с навыком, и без; gate-scan по фиче переезжает в commit-msg, кейсы переименованы в handover-* |
 | 6 | skills/council | done | flaky 1.00→1.00 (без плагина 0.00/0.25); промежуточная версия 0.25 — отказывалась собирать консилиум по прямой просьбе, исправлено |
-| 7 | skills/commit-msg | | |
+| 7 | skills/commit-msg | done | split 1.00→1.00 (без плагина 0.00: модель коммитит сама и одним коммитом) · handover-gates/dirty/clean 1.00 (без 1.00) |
 | 8 | skills/catchup | | |
 | 9 | skills/handoff | | |
 | 10 | skills/conventions | | |
