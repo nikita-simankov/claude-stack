@@ -55,7 +55,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 1 | skills/tdd | done | red 1.00 · green 0.75→1.00 · wrong-test 1.00 (без плагина: 0.50 · 1.00 · 1.00) |
 | 2 | skills/spec | done | grounds 1.00 · scope 1.00 · writes 0.88→1.00 (без плагина: 1.00 · 1.00 · 0.88→1.00, шум грейдера); выдуманные решения теперь уходят в D-список |
 | 3 | skills/tasks | done | from-approved 1.00→1.00 (sonnet-судья, 3 прогона) · refuses-draft 1.00→1.00 (без плагина 0.25→0.00) · spec-changed 1.00→1.00 |
-| 4 | skills/debug | | |
+| 4 | skills/debug | done | env 1.00→1.00 (без плагина 0.50) · root-cause 1.00→1.00 (без плагина 1.00 на исправленном грейдере) · wrong-premise 1.00→1.00 (без 1.00) |
 | 5 | skills/self-review | | |
 | 6 | skills/council | | |
 | 7 | skills/commit-msg | | |

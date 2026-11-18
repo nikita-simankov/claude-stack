@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: debug-env
+tags: [debug]
+context:
+  scaffold_script: scaffold.sh
