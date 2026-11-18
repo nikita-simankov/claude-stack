@@ -40,7 +40,6 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 /stack:tasks         → docs/specs/<фича>/tasks.md     ты утверждаешь
 /stack:tdd           → RED: падающий тест → СТОП, ты проверяешь тест
                      → GREEN: тесты заморожены хуком → REFACTOR → [x] в tasks.md
-/stack:self-review   → проверка диффа
 /stack:commit-msg    → готовые git-команды; коммитишь ты
 ```
 
@@ -57,7 +56,6 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 | `tdd` | Один цикл red → стоп → green → refactor |
 | `debug` | Воспроизвести → гипотезы → корень → регрессионный тест |
 | `council` | Консилиум N ролей параллельно + один вердикт |
-| `self-review` | Ревью своего диффа по чеклисту |
 | `commit-msg` | Conventional Commit + команды для тебя |
 | `catchup` | Восстановить контекст сессии |
 | `handoff` | Записать `HANDOFF.md` |

@@ -56,7 +56,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 2 | skills/spec | done | grounds 1.00 · scope 1.00 · writes 0.88→1.00 (без плагина: 1.00 · 1.00 · 0.88→1.00, шум грейдера); выдуманные решения теперь уходят в D-список |
 | 3 | skills/tasks | done | from-approved 1.00→1.00 (sonnet-судья, 3 прогона) · refuses-draft 1.00→1.00 (без плагина 0.25→0.00) · spec-changed 1.00→1.00 |
 | 4 | skills/debug | done | env 1.00→1.00 (без плагина 0.50) · root-cause 1.00→1.00 (без плагина 1.00 на исправленном грейдере) · wrong-premise 1.00→1.00 (без 1.00) |
-| 5 | skills/self-review | | |
+| 5 | skills/self-review | **удалён** | dirty 1.00 · clean 1.00 · gates 1.00 — и с навыком, и без; gate-scan по фиче переезжает в commit-msg, кейсы переименованы в handover-* |
 | 6 | skills/council | | |
 | 7 | skills/commit-msg | | |
 | 8 | skills/catchup | | |

@@ -48,6 +48,7 @@ command -v shellcheck >/dev/null 2>&1 || echo "  (shellcheck not installed — s
 echo "Hook and script tests"
 bash tests/hooks.test.sh || fail=1
 bash tests/gate-scan.test.sh || fail=1
+bash tests/skill-injections.test.sh || fail=1
 
 echo "Plugin manifest"
 if command -v claude >/dev/null 2>&1; then

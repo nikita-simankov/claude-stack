@@ -7,7 +7,7 @@
 /stack:tasks →  docs/specs/<фича>/tasks.md     (задачи, у каждой — тест-кейсы)
 /stack:tdd   →  RED (пишет падающий тест) → СТОП, ты проверяешь тест
              →  GREEN (тесты заморожены хуком) → REFACTOR → отметка в tasks.md
-/stack:self-review → /stack:commit-msg (готовит сообщение, коммитишь ты)
+/stack:commit-msg (gate-scan по фиче + сообщение, коммитишь ты)
 ```
 
 Тупик: `debugger` → `/stack:council` (5 ролей + синтезатор, `council 10` вручную).
@@ -24,7 +24,6 @@
 | `tdd` | Один цикл red → стоп → green → refactor |
 | `debug` | Системная отладка: воспроизвести → гипотезы → корень → тест на баг |
 | `council` | Консилиум N ролей + синтез в один вердикт |
-| `self-review` | Ревью собственного диффа перед сдачей |
 | `commit-msg` | Conventional Commit сообщение по диффу (без коммита) |
 | `catchup` | Восстановить контекст: дифф, активная спека, HANDOFF |
 | `handoff` | Записать HANDOFF.md для следующей сессии |

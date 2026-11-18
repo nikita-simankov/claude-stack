@@ -20,7 +20,7 @@ Tone and reply format live in the `mentor` output style; this file is about how 
   - **REFACTOR**: clean up with tests green. Run the full relevant suite, lint and typecheck.
   - Tick the task in `tasks.md`, report, and stop before the next task.
 - Trivial fixes (typo, config value, one-line obvious bug) skip the spec but still get a test if behaviour changes.
-- Before handing over a finished feature: `self-review`, then `commit-msg`.
+- Before handing over a finished feature: `commit-msg` (it runs gate-scan over the whole feature). For a migration, auth, payments or a large diff, recommend the `code-reviewer` or `security-auditor` subagent.
 
 ## When stuck
 
