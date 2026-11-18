@@ -45,8 +45,9 @@ for f in hooks/scripts/*.sh scripts/*.sh tests/*.sh; do
 done
 command -v shellcheck >/dev/null 2>&1 || echo "  (shellcheck not installed — skipped lint)"
 
-echo "Hook tests"
+echo "Hook and script tests"
 bash tests/hooks.test.sh || fail=1
+bash tests/gate-scan.test.sh || fail=1
 
 echo "Plugin manifest"
 if command -v claude >/dev/null 2>&1; then
