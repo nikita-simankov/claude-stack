@@ -16,7 +16,7 @@ file_in() { jq -cn --arg t "$1" --arg p "$2" '{tool_name:$t,tool_input:{file_pat
 g() { check guard-git.sh "$(bash_in "$1")" "$2" "$1"; }
 s() { check guard-secrets.sh "$(bash_in "$1")" "$2" "$1"; }
 sf() { check guard-secrets.sh "$(file_in "$1" "$2")" "$3" "$1 $2"; }
-tf() { check guard-tests.sh "$(file_in Edit "$T/$1")" "$2" "[$(cat "$T/.claude/tdd-phase" 2>/dev/null || echo none)] $1"; }
+tf() { check guard-tests.sh "$(file_in Edit "$T/$1")" "$2" "[$(cat "$T/.claude-stack/tdd-phase" "$T/.claude/tdd-phase" 2>/dev/null | head -1 || echo none)] $1"; }
 
 # guard-git: read-only allowed
 for c in 'git status' 'git diff --stat && git log --oneline -5' 'git -C sub --no-pager log -p -- a.ts' \
@@ -40,10 +40,13 @@ sf Write /p/.env.example allow; sf Read /p/src/env.ts allow
 
 # guard-tests
 tf src/a.test.ts allow
-mkdir -p "$T/.claude"; echo green >"$T/.claude/tdd-phase"
+CLAUDE_PROJECT_DIR="$T" bash "$H/../../scripts/tdd-phase.sh" green T1 >/dev/null
 for p in src/a.test.ts svc/user_test.go crate/tests/api.rs src/__tests__/x.tsx e2e/login.spec.ts; do tf "$p" BLOCK; done
 for p in src/a.ts svc/user.go crate/src/lib.rs; do tf "$p" allow; done
-echo refactor >"$T/.claude/tdd-phase"; tf src/a.test.ts allow
+CLAUDE_PROJECT_DIR="$T" bash "$H/../../scripts/tdd-phase.sh" refactor T1 >/dev/null; tf src/a.test.ts allow
+CLAUDE_PROJECT_DIR="$T" bash "$H/../../scripts/tdd-phase.sh" clear >/dev/null
+mkdir -p "$T/.claude"; echo green >"$T/.claude/tdd-phase"; tf src/a.test.ts BLOCK   # legacy location still honoured
+rm -f "$T/.claude/tdd-phase"; tf src/a.test.ts allow
 
 printf '  hooks: %d passed, %d failed\n' "$pass" "$failed"
 ((failed == 0))

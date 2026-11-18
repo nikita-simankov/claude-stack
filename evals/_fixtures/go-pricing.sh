@@ -59,5 +59,5 @@ Spec: ./spec.md
     - percent -1 returns ErrInvalidPercent and 0
     - percent 101 returns ErrInvalidPercent and 0
 MD
-printf 'HANDOFF.md\n.claude/tdd-phase\n' > .gitignore
+printf 'HANDOFF.md\n.claude/tdd-phase\n.claude-stack/\n' > .gitignore
 git add -A && git commit -qm "feat(pricing): apply percent discount"

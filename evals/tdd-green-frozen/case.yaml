@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: tdd-green-frozen
+tags: [tdd]
+context:
+  scaffold_script: scaffold.sh

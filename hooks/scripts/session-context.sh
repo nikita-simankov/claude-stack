@@ -22,9 +22,8 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   fi
 fi
 
-if [[ -f .claude/tdd-phase ]]; then
-  add "TDD phase in progress: $(tr -d '[:space:]' <.claude/tdd-phase) (from .claude/tdd-phase)"
-fi
+phase="$(tdd_phase "$root")"
+[[ -n "$phase" ]] && add "TDD phase in progress: $phase (scripts/tdd-phase.sh show; clear it if the cycle was abandoned)"
 
 shopt -s nullglob
 for f in docs/specs/*/tasks.md; do

@@ -34,3 +34,13 @@ block() {
 project_dir() {
   printf '%s' "${CLAUDE_PROJECT_DIR:-$(json_get .cwd)}"
 }
+
+# tdd_phase <root> — current TDD phase word, or empty. Written by scripts/tdd-phase.sh into
+# .claude-stack/tdd-phase ("<phase> <task-id>"); .claude/tdd-phase is read as a legacy fallback.
+tdd_phase() {
+  local f
+  for f in "$1/.claude-stack/tdd-phase" "$1/.claude/tdd-phase"; do
+    [[ -f "$f" ]] && { awk 'NR==1{print $1}' "$f"; return 0; }
+  done
+  return 0
+}

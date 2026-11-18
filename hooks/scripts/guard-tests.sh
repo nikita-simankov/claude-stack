@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 # PreToolUse(Edit/Write): during the TDD GREEN phase test files are frozen.
-# Phase lives in <project>/.claude/tdd-phase, written by the tdd skill.
+# Phase comes from <project>/.claude-stack/tdd-phase (scripts/tdd-phase.sh), see lib.sh tdd_phase.
 set -uo pipefail
 source "$(dirname "$0")/lib.sh"
 
 root="$(project_dir)"
-phase_file="$root/.claude/tdd-phase"
-[[ -f "$phase_file" ]] || exit 0
-phase="$(tr -d '[:space:]' <"$phase_file")"
-[[ "$phase" == "green" ]] || exit 0
+[[ "$(tdd_phase "$root")" == "green" ]] || exit 0
 
 path="$(json_get .tool_input.file_path)"
 [[ -z "$path" ]] && path="$(json_get .tool_input.notebook_path)"

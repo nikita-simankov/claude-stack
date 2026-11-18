@@ -34,11 +34,9 @@
       "Bash(git log:*)",
       "Bash(git show:*)",
       "Bash(git blame:*)",
-      "Bash(mkdir -p .claude:*)",
-      "Bash(echo red > .claude/tdd-phase)",
-      "Bash(echo green > .claude/tdd-phase)",
-      "Bash(echo refactor > .claude/tdd-phase)",
-      "Bash(rm -f .claude/tdd-phase)"
+      "Bash(bash *scripts/tdd-phase.sh *)",
+      "Bash(bash *scripts/gate-scan.sh*)",
+      "Bash(bash *scripts/detect-checks.sh*)"
     ],
     "deny": [
       "Read(**/.env)",

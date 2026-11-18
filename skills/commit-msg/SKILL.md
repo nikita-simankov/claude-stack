@@ -20,4 +20,4 @@ git add <paths>
 git commit -m "feat(billing): add proration for mid-cycle upgrades" -m "Spec: docs/specs/proration/spec.md (T1-T4)"
 ```
 
-Flag anything that must not be committed (secrets, `.env`, large binaries, `.claude/tdd-phase`, `HANDOFF.md`).
+Flag anything that must not be committed (secrets, `.env`, large binaries, `.claude-stack/`, `HANDOFF.md`).

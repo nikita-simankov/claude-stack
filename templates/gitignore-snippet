@@ -1,4 +1,4 @@
 # claude-stack: per-session working files
 HANDOFF.md
-.claude/tdd-phase
+.claude-stack/
 .claude/settings.local.json

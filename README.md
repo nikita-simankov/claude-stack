@@ -82,7 +82,7 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 |---|---|
 | `guard-git` | Блокирует любые пишущие git-команды. Чтение (`status/diff/log/show/blame`) разрешено. Выключить для проекта: `"env": {"STACK_ALLOW_GIT": "1"}` в его `.claude/settings.json` |
 | `guard-secrets` | Не даёт читать/писать `.env*` (кроме `.env.example`), ключи, сертификаты; блокирует `rm -rf /~.*`, `curl \| sh`, `DROP/TRUNCATE`, дамп окружения |
-| `guard-tests` | В фазе GREEN (`.claude/tdd-phase`) запрещает правку тест-файлов |
+| `guard-tests` | В фазе GREEN (`.claude-stack/tdd-phase`, пишет `scripts/tdd-phase.sh`) запрещает правку тест-файлов |
 | `autoformat` | Biome / gofmt / rustfmt после каждой правки. Только формат, без lint-фиксов — иначе сносились бы импорты, которые Claude вот-вот использует |
 | `session-context` | На старте: ветка, незакоммиченное, фаза TDD, активная задача, `HANDOFF.md` |
 

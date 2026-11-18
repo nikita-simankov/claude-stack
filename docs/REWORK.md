@@ -52,7 +52,7 @@ Cite target lines as <file>:<line>. No preamble.
 | # | Позиция | Статус | Eval до → после |
 |---|---|---|---|
 | 0 | Инфраструктура: gate-scan, detect-checks, evals, протокол | done | — |
-| 1 | skills/tdd | | |
+| 1 | skills/tdd | done | red 1.00 · green 0.75→1.00 · wrong-test 1.00 (без плагина: 0.50 · 1.00 · 1.00) |
 | 2 | skills/spec | | |
 | 3 | skills/tasks | | |
 | 4 | skills/debug | | |
