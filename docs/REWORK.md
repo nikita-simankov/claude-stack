@@ -60,7 +60,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 6 | skills/council | done | flaky 1.00→1.00 (без плагина 0.00/0.25); промежуточная версия 0.25 — отказывалась собирать консилиум по прямой просьбе, исправлено |
 | 7 | skills/commit-msg | done | split 1.00→1.00 (без плагина 0.00: модель коммитит сама и одним коммитом) · handover-gates/dirty/clean 1.00 (без 1.00) |
 | 8 | skills/catchup | done | injection 1.00→1.00 (3 прогона; без плагина 0.50: не замечает подложенную команду и путает фазу) |
-| 9 | skills/handoff | | |
+| 9 | skills/handoff | done | midcycle 1.00→1.00 (3 прогона, +грейдер «нет выдуманного одобрения»; без плагина 0.25→0.20) · catchup-injection регресс 1.00 |
 | 10 | skills/conventions | | |
 | 11 | skills/research | | |
 | 12 | skills/new-skill | | |
