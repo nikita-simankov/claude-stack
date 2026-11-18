@@ -88,11 +88,11 @@ out="$(bash "$SCAN" HEAD~2)"
 expect_has "$out" '^RH-1 +src/a.test.ts' "scan against base ref"
 
 # --- not a repo ---
-cd "$T" && mkdir -p plain && cd plain
+cd "$T" && mkdir -p plain && cd plain || exit 1
 bash "$SCAN" >/dev/null 2>&1; [[ $? -eq 1 ]] && ok || fail "non-repo exits 1"
 
 # --- detect-checks ---
-mkdir -p "$T/ts" && cd "$T/ts"
+mkdir -p "$T/ts" && cd "$T/ts" || exit 1
 printf '{"scripts":{"test":"vitest"},"devDependencies":{"vitest":"1"}}' > package.json
 touch pnpm-lock.yaml biome.json tsconfig.json
 out="$(bash "$DETECT")"
@@ -100,7 +100,7 @@ expect_has "$out" '^PM: pnpm$' "detect pnpm"
 expect_has "$out" '^TEST: pnpm vitest run' "detect vitest"
 expect_has "$out" '^TYPECHECK: pnpm tsc --noEmit' "detect tsc"
 expect_has "$out" '^LINT: pnpm biome check' "detect biome"
-mkdir -p "$T/go" && cd "$T/go" && printf 'module x\n' > go.mod
+mkdir -p "$T/go" && cd "$T/go" || exit 1; printf 'module x\n' > go.mod
 out="$(bash "$DETECT")"
 expect_has "$out" '^TEST: go test ./\.\.\. -race' "detect go"
 expect_not "$out" '^PM:' "go project has no PM"
