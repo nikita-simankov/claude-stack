@@ -3,6 +3,7 @@
 # to the repository, index, refs, stash, config or remote. Read-only git is allowed.
 # Escape hatch for a specific repo: set STACK_ALLOW_GIT=1 in that project's settings env.
 set -uo pipefail
+export FAIL_CLOSED=1
 source "$(dirname "$0")/lib.sh"
 
 [[ "${STACK_ALLOW_GIT:-0}" == "1" ]] && exit 0

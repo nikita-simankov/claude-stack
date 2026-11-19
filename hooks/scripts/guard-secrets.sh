@@ -38,12 +38,30 @@ if [[ "$tool" == "Bash" ]]; then
   if printf '%s' "$cmd" | grep -Eq '(curl|wget)[^|]*\|[[:space:]]*(sudo[[:space:]]+)?(ba|z|da)?sh'; then
     block "piping a download into a shell. Download, inspect, then run."
   fi
-  if printf '%s' "$cmd" | grep -Eqi '(drop[[:space:]]+(database|schema|table)|truncate[[:space:]]+(table[[:space:]]+)?[a-z_"]|dropdb[[:space:]])'; then
-    block "destructive SQL (DROP/TRUNCATE). Give the statement to the user to run."
+  if printf '%s' "$cmd" | grep -Eqi '(drop[[:space:]]+(database|schema|table)|truncate[[:space:]]+(table[[:space:]]+)?[a-z_"]|dropdb[[:space:]]|drizzle-kit[[:space:]]+(push|migrate))'; then
+    ask "destructive SQL or a schema push. Fine only against a local or test database — confirm which database this targets."
+  fi
+  # Recursive grep reads every file, .env included, when the project has one.
+  if printf '%s' "$cmd" | grep -Eq '(^|[;&|[:space:]])grep[[:space:]]+(-[A-Za-z]*[rR]|--recursive)' \
+     && ! printf '%s' "$cmd" | grep -Eq -- '--exclude(=|[[:space:]]+)["'"'"']?\.env' \
+     && compgen -G "$(project_dir)/.env*" >/dev/null 2>&1 \
+     && [[ -n "$(find "$(project_dir)" -maxdepth 3 -name '.env*' ! -name '.env.example' ! -name '.env.sample' ! -name '.env.template' -print -quit 2>/dev/null)" ]]; then
+    block "recursive grep would read .env files here. Use git grep (tracked files only) or add --exclude='.env*'."
   fi
   if printf '%s' "$cmd" | grep -Eq '(mkfs|dd[[:space:]]+[^|]*of=/dev/|chmod[[:space:]]+-R[[:space:]]+777|>[[:space:]]*/dev/sd)'; then
     block "system-destructive command."
   fi
+  exit 0
+fi
+
+# Search tools: a path or glob aimed at a secret file.
+if [[ "$tool" == "Grep" || "$tool" == "Glob" ]]; then
+  for v in "$(json_get .tool_input.path)" "$(json_get .tool_input.glob)" "$(json_get .tool_input.pattern)"; do
+    [[ -z "$v" || "$tool" == "Grep" && "$v" == "$(json_get .tool_input.pattern)" ]] && continue
+    if is_secret_path "$v" || [[ "$v" =~ (^|/)\.env($|[^.]|\.(local|development|production|test)) ]]; then
+      block "$tool aimed at secret files ($v). Search tracked code instead; ask the user for the value you need."
+    fi
+  done
   exit 0
 fi
 

@@ -4,6 +4,13 @@
 # Read hook input once.
 HOOK_INPUT="$(cat)"
 
+# Guards that must hold even when broken export FAIL_CLOSED=1 before sourcing this file.
+# Checked here, not in json_get: json_get runs in $(...), where exit only ends the subshell.
+if [[ "${FAIL_CLOSED:-0}" == "1" ]] && ! command -v jq >/dev/null 2>&1 && ! command -v python3 >/dev/null 2>&1; then
+  echo "BLOCKED by claude-stack: neither jq nor python3 found, so this guard cannot check the command. Install jq." >&2
+  exit 2
+fi
+
 # json_get <jq-path>  — prints the value or empty string.
 json_get() {
   if command -v jq >/dev/null 2>&1; then
@@ -29,6 +36,18 @@ except Exception:
 block() {
   echo "BLOCKED by claude-stack: $1" >&2
   exit 2
+}
+
+# ask <message> — let the user decide in the permission prompt instead of a hard deny.
+# For actions that are fine in some contexts (destructive SQL on a local DB).
+ask() {
+  local msg="claude-stack: $1"
+  if command -v jq >/dev/null 2>&1; then
+    jq -cn --arg r "$msg" '{hookSpecificOutput:{hookEventName:"PreToolUse",permissionDecision:"ask",permissionDecisionReason:$r}}'
+  else
+    python3 -c 'import json,sys; print(json.dumps({"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"ask","permissionDecisionReason":sys.argv[1]}}))' "$msg"
+  fi
+  exit 0
 }
 
 project_dir() {
