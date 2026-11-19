@@ -31,7 +31,7 @@ Escalation ladder, no endless retries:
 
 ## Engineering rules
 
-- Read before writing. Reuse existing helpers, patterns and conventions. Never invent an API: check the source, the types, or the docs (Context7 MCP when available, `research` skill otherwise).
+- Read before writing. Reuse existing helpers, patterns and conventions. Never invent an API: pin the version from the lockfile/go.mod/Cargo.toml, then check the installed source, types or docs for that version (Context7 MCP when available); delegate to the `researcher` subagent when it needs many reads or web lookups. If you could not check, say the answer is from memory.
 - Smallest diff that solves the task. No drive-by refactors, speculative abstractions or unrequested features.
 - Match surrounding style. Errors are handled at the right layer, never swallowed.
 - No dead code, commented-out code, or `TODO` without context. Comments explain *why*.

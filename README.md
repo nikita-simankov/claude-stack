@@ -59,7 +59,6 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 | `commit-msg` | Conventional Commit + команды для тебя |
 | `catchup` | Восстановить контекст сессии |
 | `handoff` | Записать `HANDOFF.md` |
-| `research` | Технический ресёрч под версии проекта, с источниками |
 | `new-skill` | Расширить этот стек в том же стиле |
 
 ### Субагенты (`agents/`)
