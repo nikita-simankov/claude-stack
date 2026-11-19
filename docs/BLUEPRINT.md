@@ -36,8 +36,8 @@
 ## Хуки (`hooks/`)
 | Хук | Событие | Что делает |
 |---|---|---|
-| `guard-git` | PreToolUse · Bash | Блокирует add/commit/push/reset/rebase/merge/checkout/stash/tag/… Чтение (status/diff/log/show/blame) разрешено |
-| `guard-secrets` | PreToolUse · Read/Edit/Write/Bash | Блок `.env*`, ключей, `*.pem`; `rm -rf /~`, `curl \| sh`, `DROP/TRUNCATE` |
+| `guard-git` | PreToolUse · Bash | Fail-closed. Блокирует add/commit/push/reset/rebase/merge/checkout/stash/tag/… Чтение (status/diff/log/show/blame) разрешено |
+| `guard-secrets` | PreToolUse · Read/Edit/Write/Grep/Glob/Bash | Блок `.env*`, ключей, `*.pem`, рекурсивного grep по ним; `rm -rf /~`, `curl \| sh`; `DROP/TRUNCATE` → вопрос (ask) |
 | `guard-tests` | PreToolUse · Edit/Write | В фазе GREEN запрещает править тест-файлы |
 | `autoformat` | PostToolUse · Edit/Write | Biome / gofmt / rustfmt, если есть в проекте |
 | `session-context` | SessionStart | Ветка, git status, активная спека и задача, HANDOFF.md |

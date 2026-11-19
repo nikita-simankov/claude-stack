@@ -73,17 +73,18 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 ### Хуки (`hooks/`)
 | Хук | Что делает |
 |---|---|
-| `guard-git` | Блокирует любые пишущие git-команды. Чтение (`status/diff/log/show/blame`) разрешено. Выключить для проекта: `"env": {"STACK_ALLOW_GIT": "1"}` в его `.claude/settings.json` |
-| `guard-secrets` | Не даёт читать/писать `.env*` (кроме `.env.example`), ключи, сертификаты; блокирует `rm -rf /~.*`, `curl \| sh`, `DROP/TRUNCATE`, дамп окружения |
+| `guard-git` | Блокирует любые пишущие git-команды; без `jq` и `python3` блокирует всё, а не пропускает. Чтение (`status/diff/log/show/blame`) разрешено. Выключить для проекта: `"env": {"STACK_ALLOW_GIT": "1"}` в его `.claude/settings.json` |
+| `guard-secrets` | Не даёт читать/писать/искать (`Read/Edit/Write/Grep/Glob/Bash`) `.env*` (кроме `.env.example`), ключи, сертификаты; блокирует `rm -rf /~.*`, `curl \| sh`, дамп окружения, рекурсивный `grep` без `--exclude='.env*'`. `DROP/TRUNCATE/drizzle-kit push` — не блок, а вопрос тебе: на локальной БД это нормально |
 | `guard-tests` | В фазе GREEN (`.claude-stack/tdd-phase`, пишет `scripts/tdd-phase.sh`) запрещает правку тест-файлов |
 | `autoformat` | Biome / gofmt / rustfmt после каждой правки. Только формат, без lint-фиксов — иначе сносились бы импорты, которые Claude вот-вот использует |
 | `session-context` | На старте: ветка, незакоммиченное, фаза TDD, активная задача, `HANDOFF.md` |
 
 ### Прочее
 - `CLAUDE.md` — мастер-промпт: правила работы.
+- Фаза TDD живёт в `.claude-stack/tdd-phase` (сам себя gitignore-ит), а не в `.claude/`: Claude Code не даёт писать в `.claude/` без подтверждения.
 - `output-styles/mentor.md` — тон: жёсткий ментор, русский, минимум текста, спорит, код-примеры. Включается вместе с плагином; выключить — `/config` → Output style.
 - `templates/` — проектный `CLAUDE.md`, `.mcp.json`, `settings.json`, `.gitignore`-сниппет.
-- `scripts/validate.sh` + `tests/hooks.test.sh` + GitHub Action — манифесты, фронтматтер, shellcheck и 60+ регрессионных кейсов хуков.
+- `scripts/validate.sh` + `tests/hooks.test.sh` + GitHub Action — манифесты, фронтматтер, shellcheck и ~150 регрессионных кейсов хуков, gate-scan и инъекций в навыках. Поведенческие eval-кейсы навыков и агентов — `evals/`, прогон `scripts/eval.sh '<name>-*'`, протокол и результаты — [docs/REWORK.md](docs/REWORK.md).
 
 ## Расширение
 
@@ -93,7 +94,7 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 scripts/validate.sh
 ```
 
-Стоимость: ~1.9k токенов постоянного контекста на сессию (описания навыков и агентов); тела грузятся только при вызове. Проверить: `claude plugin details stack@claude-stack`.
+Стоимость: ~3.5k токенов постоянного контекста на сессию (`CLAUDE.md` + стиль ≈ 2k, описания навыков и агентов ≈ 1.6k); тела навыков грузятся только при вызове. Проверить: `claude plugin details stack@claude-stack`.
 
 ## Требования
 `bash`, `jq` (или `python3` как запасной вариант для хуков). Для MCP-шаблона: `node`/`npx`, `uv`/`uvx`.
