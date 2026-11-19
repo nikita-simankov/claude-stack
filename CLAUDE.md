@@ -48,7 +48,6 @@ Delegate to protect the main context or to get an independent view, not by refle
 | Agent | Use for |
 |---|---|
 | `architect` | Design options and trade-offs for a spec; module boundaries; data models |
-| `test-writer` | RED-phase tests from a task's test cases |
 | `code-reviewer` | Independent review of a finished diff |
 | `debugger` | Root cause of a failure you could not explain |
 | `security-auditor` | Auth, input handling, secrets, SQL, file/network I/O, dependencies |

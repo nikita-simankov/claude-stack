@@ -30,7 +30,7 @@
 | `new-skill` | Расширять сам стек: новый навык/агент в том же стиле |
 
 ## Субагенты (`agents/`)
-`architect`, `code-reviewer`, `debugger`, `test-writer`, `security-auditor`, `researcher`, `doc-writer`, `critic`.
+`architect`, `code-reviewer`, `debugger`, `security-auditor`, `researcher`, `doc-writer`, `critic`.
 Роли консилиума описаны внутри навыка `council`, отдельными файлами не плодятся.
 
 ## Хуки (`hooks/`)

@@ -26,7 +26,7 @@ Phase command: `bash "${CLAUDE_PLUGIN_ROOT}/scripts/tdd-phase.sh" <red|green|ref
 1. Set phase `red <id>`; mark the task `[~]`.
 2. Write tests for this task's cases only, at the real boundary (no test-only exports or hooks). Where a table-driven test exists, add rows to it. If the test cannot compile without a new symbol, add a signature-only stub that returns zero values, with no logic.
 3. Run them. Valid RED: they fail in their own assertion on the missing behaviour. Not RED: compile, import or fixture errors; zero tests run (`[no tests to run]`, `0 passed`, `No test files found`); a missing service, DB or env var. Fix the test setup at most twice, then stop and report. For environment problems give the fix (e.g. `docker compose up -d postgres`); do not mock or skip around them. Tests pass at once → the behaviour exists: report it and ask whether to tick the task.
-4. If the `test-writer` subagent wrote the tests, run its command yourself: its "fails as expected" is a claim until you see the output.
+4. If a subagent wrote the tests, run its command yourself: its "fails as expected" is a claim until you see the output.
 5. **STOP.** Show the test code and the trimmed failure, then ask «Тест ок? Иду в GREEN?». No production code yet. If the user asks for changes or edits the test, rerun it, show it, ask again.
 
 ## 2. GREEN (after approval)
