@@ -65,7 +65,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 11 | skills/research | **удалён** | go-version 1.00/1.00 · next-version 1.00/1.00 (3 прогона); технический ресёрч остаётся за агентом researcher, пиннинг версий — строкой в CLAUDE.md |
 | 12 | skills/new-skill | done | create 0.67→0.89 (eval-кейсы в 3/3 против 0/3; без плагина 0.67) · duplicate 1.00 (без 1.00) |
 | 13 | agents/test-writer | **удалён** | red 1.00/1.00 (general-purpose с тем же брифом справляется так же; правила живут в tdd) |
-| 14 | agents/code-reviewer | | |
+| 14 | agents/code-reviewer | done | boundary 1.00→1.00 (3 прогона; без плагина 0.50 — граничный баг не находится) |
 | 15 | agents/debugger | | |
 | 16 | agents/critic | | |
 | 17 | agents/architect | | |
