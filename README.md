@@ -64,7 +64,6 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 ### Субагенты (`agents/`)
 | Агент | Модель | Доступ | Для чего |
 |---|---|---|---|
-| `architect` | opus | read-only | Варианты дизайна, контракты, схема данных |
 | `code-reviewer` | opus | read-only | Независимое ревью диффа |
 | `debugger` | opus | read + временные правки | Поиск первопричины |
 | `security-auditor` | opus | read-only | Auth, ввод, SQL, секреты, вебхуки |

@@ -68,7 +68,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 14 | agents/code-reviewer | done | boundary 1.00→1.00 (3 прогона; без плагина 0.50 — граничный баг не находится) |
 | 15 | agents/debugger | done | flaky 1.00→1.00 (3 прогона; без плагина 0.67→0.50) |
 | 16 | agents/critic | done | plan 1.00→1.00 (3 прогона; без плагина 0.50→0.67) |
-| 17 | agents/architect | | |
+| 17 | agents/architect | **удалён** | idempotency 1.00/1.00 (3 прогона; встроенный `Plan` с тем же брифом даёт те же варианты); маршрут дизайна — строкой в CLAUDE.md |
 | 18 | agents/security-auditor | | |
 | 19 | agents/researcher | | |
 | 20 | agents/doc-writer | | |

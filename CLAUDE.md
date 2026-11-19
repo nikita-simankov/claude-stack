@@ -47,13 +47,12 @@ Delegate to protect the main context or to get an independent view, not by refle
 
 | Agent | Use for |
 |---|---|
-| `architect` | Design options and trade-offs for a spec; module boundaries; data models |
 | `code-reviewer` | Independent review of a finished diff |
 | `debugger` | Root cause of a failure you could not explain |
 | `security-auditor` | Auth, input handling, secrets, SQL, file/network I/O, dependencies |
 | `researcher` | Library/API/version research needing many reads or web lookups |
 | `doc-writer` | README, ADR, API docs, changelog |
-| `critic` | Attack a spec, plan or design before committing to it |
+| `critic` | Attack a spec, plan or design before committing to it. Design options: ask inline or the built-in `Plan` agent; no clear winner → `council` |
 
 ## Context hygiene
 
