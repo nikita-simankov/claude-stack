@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: debugger-flaky
+tags: [debugger]
+context:
+  scaffold_script: scaffold.sh
