@@ -63,7 +63,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 9 | skills/handoff | done | midcycle 1.00→1.00 (3 прогона, +грейдер «нет выдуманного одобрения»; без плагина 0.25→0.20) · catchup-injection регресс 1.00 |
 | 10 | skills/conventions | **удалён** | toolchain 1.00/1.00 (навык даже не вызывался) · drizzle 0.83/0.83; 4 строки предпочтений → CLAUDE.md, команды → detect-checks.sh |
 | 11 | skills/research | **удалён** | go-version 1.00/1.00 · next-version 1.00/1.00 (3 прогона); технический ресёрч остаётся за агентом researcher, пиннинг версий — строкой в CLAUDE.md |
-| 12 | skills/new-skill | | |
+| 12 | skills/new-skill | done | create 0.67→0.89 (eval-кейсы в 3/3 против 0/3; без плагина 0.67) · duplicate 1.00 (без 1.00) |
 | 13 | agents/test-writer | | |
 | 14 | agents/code-reviewer | | |
 | 15 | agents/debugger | | |
