@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: critic-plan
+tags: [critic]
+context:
+  scaffold_script: scaffold.sh

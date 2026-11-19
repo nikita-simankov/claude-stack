@@ -67,7 +67,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 13 | agents/test-writer | **удалён** | red 1.00/1.00 (general-purpose с тем же брифом справляется так же; правила живут в tdd) |
 | 14 | agents/code-reviewer | done | boundary 1.00→1.00 (3 прогона; без плагина 0.50 — граничный баг не находится) |
 | 15 | agents/debugger | done | flaky 1.00→1.00 (3 прогона; без плагина 0.67→0.50) |
-| 16 | agents/critic | | |
+| 16 | agents/critic | done | plan 1.00→1.00 (3 прогона; без плагина 0.50→0.67) |
 | 17 | agents/architect | | |
 | 18 | agents/security-auditor | | |
 | 19 | agents/researcher | | |
