@@ -70,6 +70,6 @@ Cite target lines as <file>:<line>. No preamble.
 | 16 | agents/critic | done | plan 1.00→1.00 (3 прогона; без плагина 0.50→0.67) |
 | 17 | agents/architect | **удалён** | idempotency 1.00/1.00 (3 прогона; встроенный `Plan` с тем же брифом даёт те же варианты); маршрут дизайна — строкой в CLAUDE.md |
 | 18 | agents/security-auditor | done | orders 1.00→1.00 (3 прогона; без плагина 0.50 — IDOR не находится) |
-| 19 | agents/researcher | | |
+| 19 | agents/researcher | done (оставлен как защитный) | stdlib 1.00→1.00 (без плагина 1.00, офлайн); веб-путь офлайн не измерить — оставлен ради правил для недоверенного веб-контента |
 | 20 | agents/doc-writer | | |
 | 21 | CLAUDE.md, mentor, хуки (финал) | | |
