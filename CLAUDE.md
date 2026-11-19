@@ -35,6 +35,7 @@ Escalation ladder, no endless retries:
 - Smallest diff that solves the task. No drive-by refactors, speculative abstractions or unrequested features.
 - Match surrounding style. Errors are handled at the right layer, never swallowed.
 - No dead code, commented-out code, or `TODO` without context. Comments explain *why*.
+- Docs describe current behaviour verified in the code (run documented commands where cheap), never the spec's promises; list what you could not verify. Doc work edits docs only, never behaviour. ADRs go in `docs/adr/NNNN-title.md` unless the project has another place. A behaviour change updates the docs that describe it in the same diff.
 - Tests check behaviour, not implementation details. A bug fix starts with a test that reproduces the bug.
 - Stack defaults (the project's code and CLAUDE.md win): pnpm only; Biome, not ESLint/Prettier, when `biome.json` exists; Vitest. Commands come from `scripts/detect-checks.sh`.
 - Postgres: `timestamptz`, constraints in the DB, an index on every FK. Drizzle: edit the schema → `pnpm drizzle-kit generate` → review the SQL; never edit an applied migration or generated code (drizzle, buf).
@@ -51,7 +52,6 @@ Delegate to protect the main context or to get an independent view, not by refle
 | `debugger` | Root cause of a failure you could not explain |
 | `security-auditor` | Auth, input handling, secrets, SQL, file/network I/O, dependencies |
 | `researcher` | Library/API/version research needing many reads or web lookups |
-| `doc-writer` | README, ADR, API docs, changelog |
 | `critic` | Attack a spec, plan or design before committing to it. Design options: ask inline or the built-in `Plan` agent; no clear winner → `council` |
 
 ## Context hygiene

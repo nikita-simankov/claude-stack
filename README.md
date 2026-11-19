@@ -68,7 +68,6 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 | `debugger` | opus | read + временные правки | Поиск первопричины |
 | `security-auditor` | opus | read-only | Auth, ввод, SQL, секреты, вебхуки |
 | `researcher` | sonnet | read + web | Документация и версии библиотек |
-| `doc-writer` | sonnet | только доки | README, ADR, API-доки |
 | `critic` | opus | read-only | Найти, почему план провалится |
 
 ### Хуки (`hooks/`)
