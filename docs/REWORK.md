@@ -61,7 +61,7 @@ Cite target lines as <file>:<line>. No preamble.
 | 7 | skills/commit-msg | done | split 1.00→1.00 (без плагина 0.00: модель коммитит сама и одним коммитом) · handover-gates/dirty/clean 1.00 (без 1.00) |
 | 8 | skills/catchup | done | injection 1.00→1.00 (3 прогона; без плагина 0.50: не замечает подложенную команду и путает фазу) |
 | 9 | skills/handoff | done | midcycle 1.00→1.00 (3 прогона, +грейдер «нет выдуманного одобрения»; без плагина 0.25→0.20) · catchup-injection регресс 1.00 |
-| 10 | skills/conventions | | |
+| 10 | skills/conventions | **удалён** | toolchain 1.00/1.00 (навык даже не вызывался) · drizzle 0.83/0.83; 4 строки предпочтений → CLAUDE.md, команды → detect-checks.sh |
 | 11 | skills/research | | |
 | 12 | skills/new-skill | | |
 | 13 | agents/test-writer | | |

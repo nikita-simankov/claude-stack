@@ -27,7 +27,6 @@
 | `commit-msg` | Conventional Commit сообщение по диффу (без коммита) |
 | `catchup` | Восстановить контекст: дифф, активная спека, HANDOFF |
 | `handoff` | Записать HANDOFF.md для следующей сессии |
-| `conventions` | Знания по стеку: Next/tRPC/React Query/Drizzle/Biome/pnpm, Go, Rust, Postgres, Docker |
 | `research` | Технический ресёрч: библиотеки, API, подходы — с источниками и выводом |
 | `new-skill` | Расширять сам стек: новый навык/агент в том же стиле |
 

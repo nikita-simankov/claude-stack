@@ -36,7 +36,10 @@ Escalation ladder, no endless retries:
 - Match surrounding style. Errors are handled at the right layer, never swallowed.
 - No dead code, commented-out code, or `TODO` without context. Comments explain *why*.
 - Tests check behaviour, not implementation details. A bug fix starts with a test that reproduces the bug.
-- Stack-specific conventions (TS/Next/tRPC/Drizzle/Go/Rust/Postgres/Docker): `conventions` skill.
+- Stack defaults (the project's code and CLAUDE.md win): pnpm only; Biome, not ESLint/Prettier, when `biome.json` exists; Vitest. Commands come from `scripts/detect-checks.sh`.
+- Postgres: `timestamptz`, constraints in the DB, an index on every FK. Drizzle: edit the schema → `pnpm drizzle-kit generate` → review the SQL; never edit an applied migration or generated code (drizzle, buf).
+- Repository and API tests hit a real Postgres/Redis (test DB, compose, testcontainers); mock only process boundaries. Validate input with zod at every boundary; read env only in one validated `env.ts`.
+- The Postgres MCP is read-only. DROP, TRUNCATE, bulk UPDATE/DELETE, `drizzle-kit push/migrate` run only against a local or test database; anywhere else, hand the statement to the user.
 
 ## Subagents
 

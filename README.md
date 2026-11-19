@@ -59,7 +59,6 @@ git clone https://github.com/nikita-simankov/claude-stack ~/claude-stack
 | `commit-msg` | Conventional Commit + команды для тебя |
 | `catchup` | Восстановить контекст сессии |
 | `handoff` | Записать `HANDOFF.md` |
-| `conventions` | Правила стека: TS/Next/tRPC/React Query/Drizzle/Biome/pnpm, Go, Rust, gRPC, Postgres, Redis, Docker |
 | `research` | Технический ресёрч под версии проекта, с источниками |
 | `new-skill` | Расширить этот стек в том же стиле |
 
